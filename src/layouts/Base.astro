@@ -1,0 +1,5 @@
+---
+import '../styles/global.css';
+const {title='Paloma Cordeiro — Software Engineer',description='Software engineer building data-heavy products, SaaS platforms and complex backend systems.'}=Astro.props;
+---
+<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width"/><meta name="description" content={description}/><meta name="theme-color" content="#f2efe8"/><title>{title}</title></head><body><header class="nav shell"><a class="brand" href="/">PC<span>.</span></a><nav aria-label="Main navigation"><a href="/work">Work</a><a href="/about">About</a><a href="mailto:palomacordeiro2009@hotmail.com">Contact</a></nav></header><main><slot /></main><footer class="shell footer"><p>Paloma Cordeiro · Software Engineer</p><div><a href="https://github.com/palomacdev">GitHub</a><a href="https://www.linkedin.com/in/paloma-cordeiro-119750b6">LinkedIn</a><a href="mailto:palomacordeiro2009@hotmail.com">Email</a></div></footer></body></html>
