@@ -1,2 +1,5 @@
 import { defineConfig } from 'astro/config';
-export default defineConfig({ site: 'https://palomacdev.github.io' });
+
+export default defineConfig({
+  output: 'static',
+});
