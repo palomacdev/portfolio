@@ -1,5 +1,100 @@
 ---
-import Base from '../../layouts/Base.astro'; import {projects} from '../../data/projects';
-export function getStaticPaths(){return projects.map(project=>({params:{slug:project.slug},props:{project}}))}; const {project}=Astro.props;
+import Base from '../../layouts/Base.astro';
+import { projects } from '../../data/projects';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const isOpenWEC = project.slug === 'openwec';
 ---
-<Base title={project.name+' — Case Study · Paloma Cordeiro'} description={project.summary}><article><header class="case-hero shell"><a class="back" href="/work">← All work</a><p class="kicker">{project.eyebrow}</p><h1>{project.name}</h1><p class="case-title">{project.headline}</p><div class="meta"><div><span>Status</span><strong>{project.status}</strong></div><div><span>Proof</span><strong>{project.proof}</strong></div><div><span>Stack</span><strong>{project.stack.join(' · ')}</strong></div></div>{project.links&&<div class="actions">{project.links.map(l=><a class="button" href={l.href}>{l.label} ↗</a>)}</div>}</header><section class="case-body shell"><aside><p class="kicker">The problem</p></aside><div><h2>Start with the problem, not the stack.</h2><p class="body-big">{project.problem}</p></div></section><section class="case-body shell"><aside><p class="kicker">Architecture</p></aside><div><div class="flow">{project.architecture.map((x,i)=><><span>{x}</span>{i<project.architecture.length-1&&<b>→</b>}</>)}</div></div></section><section class="case-body shell"><aside><p class="kicker">Key decisions</p></aside><div class="decisions">{project.decisions.map((d,i)=><div><span>0{i+1}</span><p>{d}</p></div>)}</div></section><section class="case-body shell"><aside><p class="kicker">What comes next</p></aside><div><h2>Built to evolve.</h2><p class="body-big">{project.next}</p></div></section></article><section class="cta shell"><p class="kicker">Need this kind of engineering?</p><h2>Let's turn the messy part into a system.</h2><a class="button light" href="mailto:palomacordeiro2009@hotmail.com">Start a conversation ↗</a></section></Base>
+<Base title={project.name + ' — Case Study · Paloma Cordeiro'} description={project.summary}>
+  <article>
+    <header class="case-hero shell">
+      <a class="back" href="/work">← All work</a>
+      <p class="kicker">{project.eyebrow}</p>
+      <h1>{project.name}</h1>
+      <p class="case-title">{project.headline}</p>
+      <div class="meta">
+        <div><span>Status</span><strong>{project.status}</strong></div>
+        <div><span>Proof</span><strong>{project.proof}</strong></div>
+        <div><span>Stack</span><strong>{project.stack.join(' · ')}</strong></div>
+      </div>
+      {project.links && <div class="actions">{project.links.map((l) => <a class="button" href={l.href}>{l.label} ↗</a>)}</div>}
+    </header>
+
+    {isOpenWEC && (
+      <section class="evidence shell" aria-label="OpenWEC platform scale">
+        <div class="evidence-intro">
+          <p class="kicker">Platform evidence</p>
+          <p>One data product spanning collection, normalization, analytics and multiple ways to use the same racing history.</p>
+        </div>
+        <div class="evidence-grid">
+          <div><strong>2M+</strong><span>laps</span></div>
+          <div><strong>520</strong><span>events</span></div>
+          <div><strong>5,100+</strong><span>sessions</span></div>
+          <div><strong>5</strong><span>series</span></div>
+        </div>
+        <p class="evidence-note">WEC · ELMS · Asian Le Mans Series · Le Mans Cup · IMSA</p>
+      </section>
+    )}
+
+    <section class="case-body shell">
+      <aside><p class="kicker">The problem</p></aside>
+      <div><h2>Start with the problem, not the stack.</h2><p class="body-big">{project.problem}</p></div>
+    </section>
+
+    <section class="case-body shell">
+      <aside><p class="kicker">Architecture</p></aside>
+      <div>
+        {isOpenWEC ? (
+          <div class="architecture-map" aria-label="OpenWEC architecture">
+            <div class="architecture-source">
+              <span>01 · Source</span><strong>Timing exports</strong><small>Al Kamel Systems</small>
+            </div>
+            <b>→</b>
+            <div><span>02 · Collect</span><strong>Series collectors</strong><small>WEC · ELMS · ALMS · LMC · IMSA</small></div>
+            <b>→</b>
+            <div><span>03 · Store</span><strong>PostgreSQL + TimescaleDB</strong><small>Normalized race history</small></div>
+            <b>→</b>
+            <div><span>04 · Serve</span><strong>FastAPI + analytics</strong><small>REST endpoints · stint & pace engine</small></div>
+            <b>→</b>
+            <div class="architecture-output"><span>05 · Use</span><strong>SDK + dashboard</strong><small>Python · React · Recharts</small></div>
+          </div>
+        ) : (
+          <div class="flow">{project.architecture.map((x, i) => <><span>{x}</span>{i < project.architecture.length - 1 && <b>→</b>}</>)}</div>
+        )}
+      </div>
+    </section>
+
+    <section class="case-body shell">
+      <aside><p class="kicker">Key decisions</p></aside>
+      <div class="decisions">{project.decisions.map((d, i) => <div><span>0{i + 1}</span><p>{d}</p></div>)}</div>
+    </section>
+
+    {isOpenWEC && (
+      <section class="case-body shell">
+        <aside><p class="kicker">Interfaces</p></aside>
+        <div>
+          <h2>One platform. Different ways in.</h2>
+          <div class="interface-grid">
+            <div><span>REST API</span><p>Public race context plus protected lap-level and analytical endpoints.</p></div>
+            <div><span>Python SDK</span><p>Pandas-native access for reproducible analysis and endurance-specific workflows.</p></div>
+            <div><span>Dashboard</span><p>A live data explorer that turns the same underlying platform into an accessible product.</p></div>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <section class="case-body shell">
+      <aside><p class="kicker">What comes next</p></aside>
+      <div><h2>Built to evolve.</h2><p class="body-big">{project.next}</p></div>
+    </section>
+  </article>
+  <section class="cta shell">
+    <p class="kicker">Need this kind of engineering?</p>
+    <h2>Let's turn the messy part into a system.</h2>
+    <a class="button light" href="mailto:palomacordeiro2009@hotmail.com">Start a conversation ↗</a>
+  </section>
+</Base>
