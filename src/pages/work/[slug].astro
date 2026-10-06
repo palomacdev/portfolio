@@ -8,6 +8,13 @@ export function getStaticPaths() {
 
 const { project } = Astro.props;
 const isOpenWEC = project.slug === 'openwec';
+const caseLens = {
+  alphecca: { label: 'Domain lens', title: 'The quotation is a lifecycle.', text: 'Organizations, suppliers, customers, versions, proposals and decisions stay connected without weakening tenant boundaries.' },
+  argos: { label: 'Domain lens', title: 'Current state is not enough.', text: 'Ownership, stage movement, activities and next actions remain explainable through history instead of being overwritten.' },
+  asterism: { label: 'Knowledge lens', title: 'Provenance stays visible.', text: 'Sources, extraction runs, nodes and relationships remain distinct so the graph can explain where knowledge came from.' },
+  talos: { label: 'Reliability lens', title: 'Evidence before conclusions.', text: 'Raw observations are preserved before evaluation turns them into state, incidents and notifications.' },
+  'quant-ai': { label: 'Research lens', title: 'Time is part of the data.', text: 'Temporal order, calibration, backtesting and risk are part of evaluation—not cleanup after a promising model score.' },
+}[project.slug];
 ---
 <Base title={project.name + ' — Case Study · Paloma Cordeiro'} description={project.summary}>
   <article>
@@ -37,6 +44,13 @@ const isOpenWEC = project.slug === 'openwec';
           <div><strong>5</strong><span>series</span></div>
         </div>
         <p class="evidence-note">WEC · ELMS · Asian Le Mans Series · Le Mans Cup · IMSA</p>
+      </section>
+    )}
+
+    {caseLens && (
+      <section class="case-lens shell">
+        <p class="kicker">{caseLens.label}</p>
+        <div><h2>{caseLens.title}</h2><p>{caseLens.text}</p></div>
       </section>
     )}
 
