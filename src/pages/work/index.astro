@@ -1,0 +1,4 @@
+---
+import Base from '../../layouts/Base.astro'; import {projects} from '../../data/projects';
+---
+<Base title="Work — Paloma Cordeiro"><section class="page-hero shell"><p class="kicker">Case studies</p><h1>Systems, not <em>screens.</em></h1><p class="lede">Six projects. Six different engineering problems — data, SaaS, business domains, knowledge systems, reliability and temporal ML.</p></section><section class="shell section"><div class="case-grid">{projects.map((p,i)=><a class="case" href={'/work/'+p.slug}><span class="num">0{i+1}</span><p class="kicker">{p.eyebrow}</p><h3>{p.name}</h3><p class="big">{p.headline}</p><p>{p.summary}</p><div class="case-foot"><span>{p.proof}</span><b>View case →</b></div></a>)}</div></section></Base>
