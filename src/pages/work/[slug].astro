@@ -39,11 +39,29 @@ const caseLens = {
         </div>
         <div class="evidence-grid">
           <div><strong>2M+</strong><span>laps</span></div>
-          <div><strong>520</strong><span>events</span></div>
-          <div><strong>5,100+</strong><span>sessions</span></div>
+          <div><strong>500+</strong><span>events</span></div>
+          <div><strong>5,000+</strong><span>sessions</span></div>
           <div><strong>5</strong><span>series</span></div>
         </div>
         <p class="evidence-note">WEC · ELMS · Asian Le Mans Series · Le Mans Cup · IMSA</p>
+      </section>
+    )}
+
+    {isOpenWEC && (
+      <section class="product-gallery shell" aria-labelledby="openwec-gallery-title">
+        <div class="product-gallery-heading">
+          <p class="kicker">Product in practice / 01—02</p>
+          <h2 id="openwec-gallery-title">From the platform to the race.</h2>
+          <p>Real screenshots from the published OpenWEC website. No mockups or synthetic dashboards.</p>
+        </div>
+        <figure class="product-shot product-shot-primary">
+          <img src="/images/openwec-explorer.webp" width="1282" height="940" alt="OpenWEC race explorer showing WEC 2026 Le Mans race filters and classification results" loading="lazy" decoding="async" />
+          <figcaption><span>01 / Race explorer</span><span>Series → season → event → session → results</span></figcaption>
+        </figure>
+        <figure class="product-shot product-shot-secondary">
+          <img src="/images/openwec-home.webp" width="1407" height="879" alt="OpenWEC homepage with race leaderboard and endurance racing data platform statistics" loading="lazy" decoding="async" />
+          <figcaption><span>02 / Platform homepage</span><span>A unified entry point to endurance racing history</span></figcaption>
+        </figure>
       </section>
     )}
 
